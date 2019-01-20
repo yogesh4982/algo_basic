@@ -4,7 +4,38 @@ import java.util.Objects;
 
 public class Multiplication {
 
-    public int divideNConquer(int a, int b) {
+    public enum Type { DNC, KARATSUBA}
+
+    public int multiply(int a, int b, Type algo) {
+        int modifiedA = a;
+        int modifiedB = b;
+        int resultPositive = 1;
+        if (a < 0) {
+            modifiedA = a * -1;
+            resultPositive = -1;
+        }
+        if (b < 0) {
+            modifiedB = b * -1;
+            resultPositive = resultPositive * -1;
+        }
+        if(algo.equals(Type.KARATSUBA)) {
+            int alength = getLength(modifiedA);
+            int blength = getLength(modifiedB);
+            if (alength == blength) {
+                return karatsuba(modifiedA, modifiedB) * resultPositive;
+            } else if (alength > blength) {
+                modifiedB = modifiedB * power10(alength - blength);
+                return karatsuba(modifiedA, modifiedB) / power10(alength - blength) * resultPositive;
+            } else {
+                modifiedA = modifiedA * power10(blength - alength);
+                return karatsuba(modifiedA, modifiedB) / power10(blength - alength) * resultPositive;
+            }
+        } else {
+            return divideNConquer(modifiedA, modifiedB) * resultPositive;
+        }
+    }
+
+    int divideNConquer(int a, int b) {
         int aLength = getLength(a);
         int bLength = getLength(b);
         if (aLength == 1 && bLength == 1) {
@@ -23,7 +54,7 @@ public class Multiplication {
 
     }
 
-    public int karatsuba(int a, int b) {
+    int karatsuba(int a, int b) {
         int aLength = getLength(a);
         int bLength = getLength(b);
         Objects.equals(aLength, bLength);

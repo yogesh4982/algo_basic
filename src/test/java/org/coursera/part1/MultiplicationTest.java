@@ -2,6 +2,7 @@ package org.coursera.part1;
 
 import static junit.framework.TestCase.assertEquals;
 
+import org.coursera.part1.Multiplication.Type;
 import org.junit.Test;
 
 public class MultiplicationTest {
@@ -73,6 +74,24 @@ public class MultiplicationTest {
 
         result = multiplication.karatsuba(12000,12300);
         assertEquals(1476000, result/100);
+    }
+
+    @Test
+    public void testMultiply() {
+        int result = multiplication.multiply(-12,12, Type.DNC);
+        assertEquals(-144, result);
+
+        result = multiplication.multiply(-12,-12, Type.DNC);
+        assertEquals(144, result);
+
+        result = multiplication.multiply(123,12, Type.KARATSUBA);
+        assertEquals(1476, result);
+
+        result = multiplication.multiply(12,-123,  Type.KARATSUBA);
+        assertEquals(-1476, result);
+
+        result = multiplication.multiply(121,12301, Type.KARATSUBA);
+        assertEquals(1488421, result);
     }
 
 
