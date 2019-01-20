@@ -8,11 +8,13 @@
 bin/
 tmp/
 *.tmp
+*.iml
 *.bak
 *.swp
 *~.nib
 local.properties
 .settings/
+.idea/
 .loadpath
 .recommenders
 
