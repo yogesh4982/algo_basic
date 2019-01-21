@@ -6,6 +6,7 @@ public class Multiplication {
 
     public enum Type { DNC, KARATSUBA}
 
+
     public int multiply(int a, int b, Type algo) {
         int modifiedA = a;
         int modifiedB = b;
@@ -35,6 +36,12 @@ public class Multiplication {
         }
     }
 
+    /**
+     * Master method params
+     * a = 4 b = 2 and d = 1
+     * a > b ^ d
+     * O(n ^ log 4) = O(n ^ 2)
+     */
     int divideNConquer(int a, int b) {
         int aLength = getLength(a);
         int bLength = getLength(b);
@@ -54,6 +61,12 @@ public class Multiplication {
 
     }
 
+    /**
+     * Master method params
+     * a = 3 b = 2 and d = 1
+     * a > b ^ d
+     * O(n ^ log 3) = O(n ^ 1.58)
+     */
     int karatsuba(int a, int b) {
         int aLength = getLength(a);
         int bLength = getLength(b);
